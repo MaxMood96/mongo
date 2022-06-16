@@ -30,7 +30,7 @@
     "react": "^16.8",
     "react-dom": "^16.0.0",
     "bezier-js": "4.0.3",
-    "force-graph": "1.40.0",
+    "force-graph": "1.41.2",
     "react-force-graph-2d": "1.18.1",
     "react-force-graph-3d": "1.18.8",
     "react-indiana-drag-scroll": "^1.8.0",
