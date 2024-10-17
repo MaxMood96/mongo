@@ -27,6 +27,7 @@
  *    it in the license file.
  */
 
+#include "mongo/db/exec/sbe/values/bson.h"
 #include "mongo/db/exec/sbe/vm/vm.h"
 #include "mongo/db/hasher.h"
 

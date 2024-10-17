@@ -9,7 +9,7 @@ for i in {1..5}; do
 done
 
 if [ $RET -ne 0 ]; then
-  echo "Failed to clone git@github.com:10gen/QA.git"
+  echo "Failed to clone github.com/10gen/QA.git"
   exit $RET
 fi
 

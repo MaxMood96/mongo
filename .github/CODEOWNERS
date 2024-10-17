@@ -109,6 +109,9 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 /jstests/**/*reshard* @10gen/server-cluster-scalability @svc-auto-approve-bot
 /jstests/**/*unshard*collection* @10gen/server-cluster-scalability @svc-auto-approve-bot
 
+# The following patterns are parsed from ./jstests/aggregation/OWNERS.yml
+/jstests/aggregation/**/* @10gen/query @svc-auto-approve-bot
+
 # The following patterns are parsed from ./jstests/client_encrypt/OWNERS.yml
 /jstests/client_encrypt/**/* @10gen/query-integration-fle @svc-auto-approve-bot
 
@@ -329,17 +332,40 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 # The following patterns are parsed from ./jstests/noPassthrough/bson/OWNERS.yml
 /jstests/noPassthrough/bson/**/* @10gen/server-programmability @svc-auto-approve-bot
 
+# The following patterns are parsed from ./jstests/noPassthrough/clustered_collections/OWNERS.yml
+/jstests/noPassthrough/clustered_collections/**/* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthrough/collStats/OWNERS.yml
+/jstests/noPassthrough/collStats/**/* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthrough/compact/OWNERS.yml
+/jstests/noPassthrough/compact/**/* @10gen/server-rss-sydney @svc-auto-approve-bot
+
 # The following patterns are parsed from ./jstests/noPassthrough/configuration/OWNERS.yml
 /jstests/noPassthrough/configuration/**/configExpand_* @10gen/server-security @svc-auto-approve-bot
 
+# The following patterns are parsed from ./jstests/noPassthrough/crud/OWNERS.yml
+/jstests/noPassthrough/crud/**/*capped_deletes* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthrough/directoryperdb/OWNERS.yml
+/jstests/noPassthrough/directoryperdb/**/* @10gen/server-rss-sydney @svc-auto-approve-bot
+
 # The following patterns are parsed from ./jstests/noPassthrough/feature_compatibility_version/OWNERS.yml
 /jstests/noPassthrough/feature_compatibility_version/**/* @10gen/server-replication @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthrough/index_builds/OWNERS.yml
+/jstests/noPassthrough/index_builds/**/* @10gen/server-storage-execution @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/noPassthrough/interruption/OWNERS.yml
 /jstests/noPassthrough/interruption/**/* @10gen/server-programmability @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/noPassthrough/libs/OWNERS.yml
 /jstests/noPassthrough/libs/**/*server_parameter* @10gen/server-programmability @svc-auto-approve-bot
+/jstests/noPassthrough/libs/**/*index_build* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthrough/oplog/OWNERS.yml
+/jstests/noPassthrough/oplog/**/check_for_oplog_cap_maintainer_thread.js @10gen/server-storage-execution @svc-auto-approve-bot
+/jstests/noPassthrough/oplog/**/* @10gen/server-replication @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/noPassthrough/query/OWNERS.yml
 /jstests/noPassthrough/query/**/* @10gen/query @svc-auto-approve-bot
@@ -401,6 +427,9 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 # The following patterns are parsed from ./jstests/noPassthrough/read_write_concern/OWNERS.yml
 /jstests/noPassthrough/read_write_concern/**/* @10gen/server-replication @svc-auto-approve-bot
 
+# The following patterns are parsed from ./jstests/noPassthrough/recordid/OWNERS.yml
+/jstests/noPassthrough/recordid/**/prepare_recordid_initialization.js @10gen/server-storage-execution @svc-auto-approve-bot
+
 # The following patterns are parsed from ./jstests/noPassthrough/replication/OWNERS.yml
 /jstests/noPassthrough/replication/**/* @10gen/server-replication @svc-auto-approve-bot
 
@@ -416,6 +445,15 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 # The following patterns are parsed from ./jstests/noPassthrough/timeseries/OWNERS.yml
 /jstests/noPassthrough/timeseries/**/* @10gen/server-storage-execution @svc-auto-approve-bot
 
+# The following patterns are parsed from ./jstests/noPassthrough/ttl/OWNERS.yml
+/jstests/noPassthrough/ttl/**/* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthrough/txns_retryable_writes_sessions/OWNERS.yml
+/jstests/noPassthrough/txns_retryable_writes_sessions/**/skip_write_conflict_retries_failpoint.js @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthrough/txns_too_large_for_cache/OWNERS.yml
+/jstests/noPassthrough/txns_too_large_for_cache/**/* @10gen/server-rss-sydney @10gen/server-storage-execution @svc-auto-approve-bot
+
 # The following patterns are parsed from ./jstests/noPassthrough/validate/OWNERS.yml
 /jstests/noPassthrough/validate/**/* @10gen/server-rss-sydney @svc-auto-approve-bot
 
@@ -423,14 +461,18 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 /jstests/noPassthrough/wt_integration/**/* @10gen/server-rss-sydney @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/noPassthroughWithMongod/OWNERS.yml
-/jstests/noPassthroughWithMongod/**/connections_opened.js @10gen/server-networking-and-observability @svc-auto-approve-bot
-/jstests/noPassthroughWithMongod/**/host_connection_string_validation.js @10gen/server-networking-and-observability @svc-auto-approve-bot
-/jstests/noPassthroughWithMongod/**/ingress_handshake_and_auth_metrics.js @10gen/server-networking-and-observability @svc-auto-approve-bot
-/jstests/noPassthroughWithMongod/**/ipv6_connection_string_validation.js @10gen/server-networking-and-observability @svc-auto-approve-bot
-/jstests/noPassthroughWithMongod/**/replset_host_connection_validation.js @10gen/server-networking-and-observability @svc-auto-approve-bot
 /jstests/noPassthroughWithMongod/**/tcmalloc.js @10gen/server-workload-scheduling @svc-auto-approve-bot
 /jstests/noPassthroughWithMongod/**/ftdc_params.js @10gen/server-networking-and-observability @svc-auto-approve-bot
 /jstests/noPassthroughWithMongod/**/log_component_helpers.js @10gen/server-networking-and-observability @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthroughWithMongod/collStats/OWNERS.yml
+/jstests/noPassthroughWithMongod/collStats/**/* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthroughWithMongod/index/OWNERS.yml
+/jstests/noPassthroughWithMongod/index/**/* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthroughWithMongod/network/OWNERS.yml
+/jstests/noPassthroughWithMongod/network/**/* @10gen/server-networking-and-observability @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/noPassthroughWithMongod/query/OWNERS.yml
 /jstests/noPassthroughWithMongod/query/**/* @10gen/query @svc-auto-approve-bot
@@ -445,6 +487,15 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/noPassthroughWithMongod/query/sbe/OWNERS.yml
 /jstests/noPassthroughWithMongod/query/sbe/**/* @10gen/query-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthroughWithMongod/timeseries/OWNERS.yml
+/jstests/noPassthroughWithMongod/timeseries/**/* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthroughWithMongod/ttl/OWNERS.yml
+/jstests/noPassthroughWithMongod/ttl/**/* @10gen/server-storage-execution @svc-auto-approve-bot
+
+# The following patterns are parsed from ./jstests/noPassthroughWithMongod/validate/OWNERS.yml
+/jstests/noPassthroughWithMongod/validate/**/* @10gen/server-rss-sydney @10gen/server-storage-execution @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/query_golden/OWNERS.yml
 /jstests/query_golden/**/* @10gen/query-optimization @svc-auto-approve-bot
@@ -712,8 +763,6 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 /src/mongo/db/index/**/key_gen_bm.cpp @10gen/query-execution @svc-auto-approve-bot
 /src/mongo/db/index/**/multikey_metadata_access_stats.h @10gen/query-execution @svc-auto-approve-bot
 /src/mongo/db/index/**/*key_generator* @10gen/query-execution @svc-auto-approve-bot
-/src/mongo/db/index/**/*column_cell* @10gen/query-execution @svc-auto-approve-bot
-/src/mongo/db/index/**/*column_store* @10gen/query-execution @svc-auto-approve-bot
 /src/mongo/db/index/**/expression_keys* @10gen/query-execution @svc-auto-approve-bot
 /src/mongo/db/index/**/expression_params* @10gen/query-execution @svc-auto-approve-bot
 /src/mongo/db/index/**/wildcard_validation* @10gen/query-execution @svc-auto-approve-bot
@@ -848,9 +897,6 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 /src/mongo/db/pipeline/**/document_source_internal_all_collection_stats* @10gen/server-catalog-and-routing @svc-auto-approve-bot
 /src/mongo/db/pipeline/**/*list_catalog* @10gen/server-catalog-and-routing @svc-auto-approve-bot
 /src/mongo/db/pipeline/**/*sharded_data_distribution* @10gen/server-catalog-and-routing @svc-auto-approve-bot
-
-# The following patterns are parsed from ./src/mongo/db/pipeline/abt/OWNERS.yml
-/src/mongo/db/pipeline/abt/**/* @10gen/query-optimization @svc-auto-approve-bot
 
 # The following patterns are parsed from ./src/mongo/db/pipeline/search/OWNERS.yml
 /src/mongo/db/pipeline/search/**/* @10gen/query-integration-search @svc-auto-approve-bot
@@ -1108,7 +1154,6 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 # The following patterns are parsed from ./src/mongo/db/storage/OWNERS.yml
 /src/mongo/db/storage/**/* @10gen/server-rss-sydney @10gen/server-storage-execution @svc-auto-approve-bot
 /src/mongo/db/storage/**/named_pipe* @10gen/query-integration-staff-leads @svc-auto-approve-bot
-/src/mongo/db/storage/**/column_store* @10gen/query-integration-staff-leads @svc-auto-approve-bot
 /src/mongo/db/storage/**/durable_catalog* @10gen/server-catalog-and-routing @10gen/server-rss-sydney @svc-auto-approve-bot
 
 # The following patterns are parsed from ./src/mongo/db/storage/key_string/OWNERS.yml

@@ -60,7 +60,6 @@
 #include "mongo/db/catalog_raii.h"
 #include "mongo/db/client.h"
 #include "mongo/db/concurrency/lock_manager_defs.h"
-#include "mongo/db/index/columns_access_method.h"
 #include "mongo/db/index/index_access_method.h"
 #include "mongo/db/operation_context.h"
 #include "mongo/db/record_id.h"
@@ -69,7 +68,6 @@
 #include "mongo/db/repl/storage_interface.h"
 #include "mongo/db/service_context.h"
 #include "mongo/db/service_context_d_test_fixture.h"
-#include "mongo/db/storage/column_store.h"
 #include "mongo/db/storage/index_entry_comparison.h"
 #include "mongo/db/storage/key_string/key_string.h"
 #include "mongo/db/storage/record_store.h"
@@ -119,7 +117,7 @@ protected:
  *
  * Returns the list of validation results.
  */
-std::vector<std::pair<BSONObj, ValidateResults>> foregroundValidate(
+std::vector<ValidateResults> foregroundValidate(
     const NamespaceString& nss,
     OperationContext* opCtx,
     bool valid,
@@ -130,19 +128,16 @@ std::vector<std::pair<BSONObj, ValidateResults>> foregroundValidate(
         {CollectionValidation::ValidateMode::kForeground,
          CollectionValidation::ValidateMode::kForegroundFull},
     CollectionValidation::RepairMode repairMode = CollectionValidation::RepairMode::kNone) {
-    std::vector<std::pair<BSONObj, ValidateResults>> results;
+    std::vector<ValidateResults> results;
     for (auto mode : modes) {
         ValidateResults validateResults;
-        BSONObjBuilder output;
         ASSERT_OK(CollectionValidation::validate(
             opCtx,
             nss,
             CollectionValidation::ValidationOptions{mode,
                                                     repairMode,
                                                     /*logDiagnostics=*/false},
-            &validateResults,
-            &output));
-        BSONObj obj = output.obj();
+            &validateResults));
         BSONObjBuilder validateResultsBuilder;
         validateResults.appendToResultObj(&validateResultsBuilder, true /* debugging */);
         auto validateResultsObj = validateResultsBuilder.obj();
@@ -157,15 +152,15 @@ std::vector<std::pair<BSONObj, ValidateResults>> foregroundValidate(
                                 return current + ivr.second.getErrors().size();
                             });
 
-        ASSERT_EQ(validateResults.isValid(), valid) << obj << validateResultsObj;
+        ASSERT_EQ(validateResults.isValid(), valid) << validateResultsObj;
         ASSERT_EQ(observedNumErrors, static_cast<long unsigned int>(expectedNumErrors))
-            << obj << validateResultsObj;
+            << validateResultsObj;
 
-        ASSERT_EQ(obj.getIntField("nrecords"), numRecords) << obj << validateResultsObj;
-        ASSERT_EQ(obj.getIntField("nInvalidDocuments"), numInvalidDocuments)
-            << obj << validateResultsObj;
+        ASSERT_EQ(validateResultsObj.getIntField("nrecords"), numRecords) << validateResultsObj;
+        ASSERT_EQ(validateResultsObj.getIntField("nInvalidDocuments"), numInvalidDocuments)
+            << validateResultsObj;
 
-        results.push_back(std::make_pair(obj, validateResults));
+        results.push_back(std::move(validateResults));
     }
     return results;
 }
@@ -445,8 +440,7 @@ TEST_F(CollectionValidationTest, ValidateOldUniqueIndexKeyWarning) {
                                             /*numErrors*/ 0);
     ASSERT_EQ(results.size(), 2);
 
-    for (const auto& result : results) {
-        const auto& validateResults = result.second;
+    for (const auto& validateResults : results) {
         const auto obj = resultToBSON(validateResults);
         ASSERT(validateResults.isValid()) << obj;
         const auto warningsWithoutTransientErrors = omitTransientWarnings(validateResults);

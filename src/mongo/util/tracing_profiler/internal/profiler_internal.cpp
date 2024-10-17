@@ -48,7 +48,7 @@ ProfilerTags* ProfilerTags::get() {
 #endif
 }
 
-ProfilerTag ProfilerTags::getOrInsertTag(const char* name) {
+ProfilerTag ProfilerTags::getOrInsertTag(StringData name) {
     auto it = _tagIdByName.find(name);
     if (it != _tagIdByName.end()) {
         return _tags[it->second];
@@ -192,7 +192,9 @@ ProfilerMetrics::ComputedMetricsBuilder::ComputedMetricsBuilder(
 
 std::vector<ProfilerMetrics::ComputedMetrics> ProfilerMetrics::ComputedMetricsBuilder::build() {
     _computedMetrics.resize(_callMetrics.nodeMetrics().size());
-    visit(0);
+    if (!_callMetrics.callTree().nodes().empty()) {
+        visit(0);
+    }
     return std::move(_computedMetrics);
 }
 

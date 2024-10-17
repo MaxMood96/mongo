@@ -1672,6 +1672,14 @@ functions:
 
   # Used by generator
   "run jstestfuzz":
+    - command: github.generate_token
+      params:
+        owner: 10gen
+        repo: QA
+        expansion_name: github_token
+        permissions:
+          metadata: read
+          contents: read
     - *f_expansions_write
     - command: subprocess.exec
       display_name: "clone repos sh"
@@ -1679,6 +1687,8 @@ functions:
         binary: bash
         args:
           - "./src/evergreen/run_jstestfuzz/clone_repos.sh"
+        include_expansions_in_env:
+          - github_token
     - *f_expansions_write
     - command: subprocess.exec
       display_name: "jstestfuzz run sh"

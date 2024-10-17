@@ -111,6 +111,8 @@ last-continuous:
       ticket: SERVER-88447
     - test_file: jstests/core/timeseries/timeseries_computed_field.js
       ticket: SERVER-88072
+    - test_file: jstests/auth/commands_builtin_roles_replset.js
+      ticket: SERVER-92411
     - test_file: jstests/auth/curop_auth_info.js
       ticket: SERVER-89664
     - test_file: jstests/auth/killop_own_ops.js
@@ -333,6 +335,10 @@ last-continuous:
       ticket: SERVER-92530
     - test_file: jstests/replsets/initial_sync_collStats_resumes_after_network_error.js
       ticket: SERVER-94259
+    - test_file: jstests/core/timeseries/drop_timeseries.js
+      ticket: SERVER-94829
+    - test_file: jstests/sharding/resharding_cloning_metrics_after_failover.js
+      ticket: SERVER-92978
   suites: null
 last-lts:
   all:
@@ -426,6 +432,8 @@ last-lts:
       ticket: SERVER-88447
     - test_file: jstests/core/timeseries/timeseries_computed_field.js
       ticket: SERVER-88072
+    - test_file: jstests/auth/commands_builtin_roles_replset.js
+      ticket: SERVER-92411
     - test_file: jstests/auth/curop_auth_info.js
       ticket: SERVER-89664
     - test_file: jstests/auth/killop_own_ops.js
@@ -680,4 +688,8 @@ last-lts:
       ticket: SERVER-92530
     - test_file: jstests/replsets/initial_sync_collStats_resumes_after_network_error.js
       ticket: SERVER-94259
+    - test_file: jstests/core/timeseries/drop_timeseries.js
+      ticket: SERVER-94829
+    - test_file: jstests/sharding/resharding_cloning_metrics_after_failover.js
+      ticket: SERVER-92978
   suites: null
