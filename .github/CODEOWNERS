@@ -961,6 +961,8 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 /jstests/libs/**/*.sha1 @10gen/server-security @svc-auto-approve-bot
 /jstests/libs/**/*.sha256 @10gen/server-security @svc-auto-approve-bot
 /jstests/libs/**/*.pfx @10gen/server-security @svc-auto-approve-bot
+/jstests/libs/**/fixture_helpers.js @10gen/server-catalog-and-routing-routing-and-topology @svc-auto-approve-bot
+/jstests/libs/**/index_utils.js @10gen/server-catalog-and-routing-shard-catalog @svc-auto-approve-bot
 
 # The following patterns are parsed from ./jstests/libs/clustered_collections/OWNERS.yml
 /jstests/libs/clustered_collections/**/* @10gen/server-collection-write-path @svc-auto-approve-bot
@@ -2918,9 +2920,6 @@ WORKSPACE.bazel @10gen/devprod-build @svc-auto-approve-bot
 /src/mongo/dbtests/**/repltests.cpp @10gen/server-replication-reviewers @svc-auto-approve-bot
 /src/mongo/dbtests/**/rollbacktests.cpp @10gen/server-recovery @svc-auto-approve-bot
 /src/mongo/dbtests/**/dbtests* @10gen/server-storage-engine-integration @svc-auto-approve-bot
-
-# The following patterns are parsed from ./src/mongo/dbtests/index_builds/OWNERS.yml
-/src/mongo/dbtests/index_builds/**/* @10gen/server-index-builds @svc-auto-approve-bot
 
 # The following patterns are parsed from ./src/mongo/dbtests/mock/OWNERS.yml
 /src/mongo/dbtests/mock/**/mock_conn_registry.* @10gen/server-networking-and-observability @svc-auto-approve-bot
